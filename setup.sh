@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #配置路径
-softdir=/data/setup/software
+softdir=/data/software
 appdir=/data/app
 tmpdir=/data/tmp
 datadir=/data/data
@@ -12,7 +12,7 @@ mkdir -p /data/{app,tmp,log,bin,conf,data}
 #system
 groupadd www
 useradd -g www www
-yum install -y make gcc gcc-c++ lrzsz
+yum install -y make gcc gcc-c++ lrzsz zip tree
 
 #解压文件
 ls $softdir/*.tar.gz | xargs -n1 tar --directory=$tmpdir/ -zxvf
@@ -47,14 +47,14 @@ useradd -r -g mysql mysql
 mkdir -p $datadir/mysql/data
 chown -R mysql:mysql $datadir/mysql
 mv $tmpdir/mysql* $appdir/mysql
-$appdir/mysql/scripts/mysql_install_db --basedir=$appdir/mysql \
-	--datadir=$datadir/mysql/data \
+$appdir/mysql/bin/mysql_install_db --basedir=$appdir/mysql \
+	--datadir=$datadir/mysql \
 	--user=mysql
 cp $appdir/mysql/support-files/mysql.server  /data/bin/mysqld
 #sed -i "s#/usr/local/mysql#/data/app/mysql#g" /etc/init.d/mysqld
 
 #安装PHP
-yum install -y libxml2-devel curl-devel
+yum install -y libxml2-devel curl-devel libpng-devel giflib-devel
 
 cd $tmpdir/php*
 ./configure --prefix=$appdir/php \
@@ -62,6 +62,10 @@ cd $tmpdir/php*
 	--with-openssl \
 	--enable-fpm \
 	--enable-mbstring \
+	--with-gd \
+	--enable-gd-native-ttf \
+	--enable-opcache \
+	--enable-zip \
 	--with-mysql=$appdir/mysql
 make && make install
 
