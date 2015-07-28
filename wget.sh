@@ -1,0 +1,1 @@
+wget -nc -b -c -i softlist.txt -P software/ -o wget.log

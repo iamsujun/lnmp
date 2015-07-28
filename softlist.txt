@@ -1,0 +1,7 @@
+http://nginx.org/download/nginx-1.7.9.tar.gz  
+http://www.memcached.org/files/memcached-1.4.22.tar.gz 
+http://rsync.samba.org/ftp/rsync/src/rsync-3.1.1.tar.gz 
+http://tw1.php.net/distributions/php-5.6.5.tar.gz 
+http://download.redis.io/redis-stable.tar.gz
+http://pecl.php.net/get/memcached-2.2.0.tgz
+http://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.5-m15-linux-glibc2.5-x86_64.tar.gz 
